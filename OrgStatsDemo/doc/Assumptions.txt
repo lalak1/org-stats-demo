@@ -1,0 +1,27 @@
+OrgStatsTool Assumptions
+
+There were several assumptions made related to the data, including:
+
+- Org ids in the org hierarchy data file are unique (no duplicates).
+- There are no commas in the org name.
+- The user id in the user data file is unique for all users across 
+  all organizations (no duplicates).
+- A user id is only associated with one organization.
+- OrgId and parentOrgId (except when null) and userId are numbers.
+- The ordering of org and user input files are likely already sorted,
+  but it isn't necessary for processing.
+
+Other assumptions include:
+
+- If an organization is assigned to a parent that doesn't exist, 
+  it is acceptable to keep it at the top level of the org tree.
+- Writing over previously created output files is acceptable.
+- Assume single threaded access of the OrgCollection.
+
+I decided to use ArrayList assuming the data files would likely already be sorted.
+Also, I'm assuming the depth of the organization hierarchy is usually not very deep.  
+For large data sets, over 500 million rows, the general idea of loading that much 
+data into memory doesn't sound like something that could be resolved by a slightly different
+Java collection implementation.  It would require storing the data in some way to be retrieved
+as it is needed instead of all at once.
+ 

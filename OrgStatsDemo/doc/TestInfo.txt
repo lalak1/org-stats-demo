@@ -1,0 +1,53 @@
+OrgStatsDemo Test Information
+
+orgstats.TestFilesGenerator:  This is a helper class used to generate random test data.  
+Given certain parameters, such as maximum number of children and maximum number of users, 
+it generates one organization hierarchy file and on user data file.  Please see the
+javadoc for more information.
+
+Test Files
+
+Test input and output files for integration tests are located in a /data directory.
+
+Existing Tests
+
+Junit tests are located in the /src/test/java/orgstats directory.
+
+1) orgstats.GenericIntegTest:  This integration test generates new org hierarchy data
+and user data for each run using the TestFilesGenerator.  Each test run produces a new file.
+
+Org Hierarchy Data: GenericOrgsData<timeInMillis>.txt (9 organizations)
+User Data:			GenericUsersData<timeInMillis>.txt
+Test Output File:	GenericOutput<timeInMillis>.txt
+
+2) orgstats.VerySmallDataFileIntegTest:  This integration test reads data from the following:
+
+Org Hierarchy Data: VerySmallOrgsTestFile.txt (9 organizations)
+User Data:			VerySmallUsersTestFile.txt
+Test Output File:	VerySmallOutputTestFile.txt
+
+3) orgstats.SmallDataFileIntegTest:  This integration test reads data from the following:
+
+Org Hierarchy Data: VerySmallOrgsTestFile.txt (19 organizations)
+User Data:			VerySmallUsersTestFile.txt
+Test Output File:	VerySmallOutputTestFile.txt
+
+Running New Tests/Executing Tool
+
+1) New tests can be run by simply running the orgstats.GenericIntegTest and the input data will be generated.
+
+2) To run already created org and user data files, use orgstats.OrgStatsTool.  For example:
+
+			// Construct the tool and the data will loaded in memory and written to a file.
+			OrgStatsTool tool = new OrgStatsTool(
+				new File(dataPath+"SmallOrgsTestFile.txt"),
+				new File(dataPath+"SmallUsersTestFile.txt"),
+				new File(dataPath+"SmallOutputTestFile.txt"));
+			
+			// Once constructed, you can get the OrgCollection() from the tool.
+			OrgCollection orgCollection = tool.getOrgCollection();
+			
+3) There is also a simple main program in orgstats.OrgStatsTool that requires the 3 filenames as arguments to run.  
+It will load the data in memory and write to the output file and provides a very simple command line
+interface to access the org usage summary printout.  Please see the javadoc for me information.
+
